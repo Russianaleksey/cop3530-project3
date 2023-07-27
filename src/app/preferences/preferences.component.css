@@ -1,0 +1,10 @@
+.prefContainer {
+  margin-left: 2vw;
+  width: 15vw;
+}
+.prefGroup {
+  display: grid;
+  position: relative;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
