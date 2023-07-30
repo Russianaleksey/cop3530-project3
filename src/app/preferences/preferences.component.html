@@ -1,16 +1,9 @@
 <div class="prefContainer">
   <h2>Preferences</h2>
-  <div class="prefGroup">
-    <label for="majors">Major: </label>
-    <select id="majors" [(ngModel)]="selectedMajor">
-      <option *ngFor="let m of majors" [ngValue]="m">{{m.name}}</option>
-    </select>
-  </div>
-
-  <div class="prefGroup">
-    <label for="lifestyles">Lifestyle:</label>
-    <select id="lifestyles" [(ngModel)]="selectedLifestyle">
-      <option *ngFor="let l of lifestyles" [ngValue]="l">{{l.name}}</option>
+  <div class="prefGroup" *ngFor="let m of userPreferences">
+    <label>{{m.name}}</label>
+    <select id="{{m.name}}" [(ngModel)]="m.selectedOption">
+      <option *ngFor="let choice of m.options" [ngValue]="choice">{{choice}}</option>
     </select>
   </div>
 </div>
