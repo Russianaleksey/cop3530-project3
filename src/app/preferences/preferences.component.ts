@@ -7,29 +7,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./preferences.component.css']
 })
 export class PreferencesComponent {
-  majors: Array<Major> = [
-    {id: 1,name: 'Computer Science'},
-    {id: 2, name: 'Math'}
-  ]
-
-  lifestyles: Array<Lifestyle> = [
-    {name: 'Outdoorsey'},
-    {name: 'Nightlife'},
-    {name: 'Bookworm'}
-  ]
-
-  selectedMajor = this.majors[0];
-  selectedLifestyle = this.lifestyles[0];
+  userPreferences: Array<UserPreference> =
+    [
+      new UserPreference('major', ['computer science', 'math']),
+      new UserPreference('lifestyle', ['outdoorsy', 'bookworm', 'scholar', 'nightlife'])
+    ];
 }
 
-interface Major {
-  name: string,
-  id: number
+class UserPreference {
+  name: string;
+  options: Array<string>;
+  selectedOption: string;
+
+  constructor(name:string , options: Array<string>) {
+    this.name = name;
+    this.options = options;
+    this.selectedOption = options[0];
+  }
+
+  updateSelectedOption(index: number): void {
+    if(index < this.options.length) {
+      this.selectedOption = this.options[index];
+    }
+  }
 }
-
-interface Lifestyle {
-  name: string
-}
-
-
-// salary, lifestyle
