@@ -33,5 +33,6 @@ import { Browser, Map, map, tileLayer, marker } from 'leaflet';
       } as any).addTo(lefletMap);
 
       marker([51.5, -0.09]).addTo(lefletMap);
+      marker([40.68295, -73.97559]).addTo(lefletMap);
     }
   }
