@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Browser, Map, map, tileLayer } from 'leaflet';
+import { Browser, Map, map, tileLayer, marker } from 'leaflet';
 
 @Component({
     selector: 'my-map',
@@ -31,5 +31,7 @@ import { Browser, Map, map, tileLayer } from 'leaflet';
         maxZoom: 20,
         id: 'osm-bright',
       } as any).addTo(lefletMap);
+
+      marker([51.5, -0.09]).addTo(lefletMap);
     }
   }
