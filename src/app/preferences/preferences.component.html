@@ -14,4 +14,16 @@
       <option *ngFor="let l of lifestyles" [ngValue]="l">{{l}}</option>
     </select>
   </div>
+
+  <div class="prefGroup">
+    <label>State</label>
+    <select id="state" [(ngModel)]="selectedState" (ngModelChange)="handleStateChange($event)">
+      <option *ngFor="let y of states" [ngValue]="y">{{y}}</option>
+    </select>
+  </div>
+
+  <div class="salaryGroup">
+    <label>Salary</label>
+    <input type="number" [(ngModel)]="salary" (ngModelChange)="handleSalaryChange($event)"/>  
+  </div>
 </div>

@@ -27,6 +27,8 @@ export class PreferencesComponent {
   lifestyles = ['outdoorsy', 'bookworm', 'scholar', 'nightlife'];
   selectedLifestyle = this.lifestyles[0];
 
+  states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IA', 'IN', 'KS', 'KY','LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT','NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH','OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT','VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+  selectedState = this.states[0];
 
   userPreferences: Array<UserPreference> =
     [
@@ -43,12 +45,12 @@ export class PreferencesComponent {
       console.log('new lifestyle change event: ' + event);
     }
 
-
-    eventChangeFunction(event: any){
-      console.log(event);
+    handleStateChange(event: any) {
+      console.log('new state change event: ' + event);
     }
+
     handleSalaryChange(event: any) {
-      console.log(event);
+      console.log('new salary change event:' + event);
     }
 }
 
