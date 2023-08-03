@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PreferencesComponent } from './preferences/preferences.component';
 
 @Component({
   selector: 'app-root',

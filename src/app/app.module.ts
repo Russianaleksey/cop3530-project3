@@ -5,17 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { MapComponent } from './map/map.component';
+import { ResultsComponent } from './results/results.component';
 @NgModule({
   declarations: [
     AppComponent,
     PreferencesComponent,
-    MapComponent
+    MapComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent, PreferencesComponent, MapComponent]
+  bootstrap: [AppComponent, PreferencesComponent, MapComponent, ResultsComponent]
 })
 export class AppModule { }
