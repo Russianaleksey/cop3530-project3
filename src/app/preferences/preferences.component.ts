@@ -84,18 +84,22 @@ export class PreferencesComponent {
   selectedState = this.states[0];
 
   handleMajorChange(event: any) {
-    console.log('new major change event: ' + event);
+    // console.log('data sent to parent: ', event);
+    this.majorChange.emit(event);
   }
 
   handleLifestyleChange(event: any) {
-    console.log('new lifestyle change event: ' + event);
+    // console.log('data sent to parent: ', event);
+    this.lifestyleChange.emit(event);
   }
 
   handleStateChange(event: any) {
-    console.log('new state change event: ' + event);
+    // console.log('data sent to parent: ', event);
+    this.stateChange.emit(event);
   }
 
   handleSalaryChange(event: any) {
-    console.log('new salary change event:' + event);
+    // console.log('data sent to parent: ', event);
+    this.salaryChange.emit(event);
   }
 }
