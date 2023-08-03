@@ -2,8 +2,8 @@
   <h2>Preferences</h2>
   <div class="prefGroup" *ngFor="let m of userPreferences">
     <label>{{m.name}}</label>
-    <select id="{{m.name}}" [(ngModel)]="m.selectedOption">
-      <option *ngFor="let choice of m.options" [ngValue]="choice" (ngModelChange)="eventChangeFunction($event)">{{choice}} </option>
+    <select id="{{m.name}}" [(ngModel)]="m.selectedOption" (ngModelChange)="eventChangeFunction($event)">
+      <option *ngFor="let choice of m.options" [ngValue]="choice">{{choice}} </option>
     </select>
   </div>
   <div class="salaryGroup">
