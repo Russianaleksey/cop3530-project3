@@ -3,10 +3,10 @@
   <div class="prefGroup" *ngFor="let m of userPreferences">
     <label>{{m.name}}</label>
     <select id="{{m.name}}" [(ngModel)]="m.selectedOption">
-      <option *ngFor="let choice of m.options" [ngValue]="choice">{{choice}}</option>
+      <option *ngFor="let choice of m.options" [ngValue]="choice" (ngModelChange)="eventChangeFunction($event)">{{choice}} </option>
     </select>
   </div>
   <div class="salaryGroup">
-    <label>Salary</label>
-    <input type="number" [(ngModel)]="salary" />  
+    <label>salary</label>
+    <input type="number" [(ngModel)]="salary" (ngModelChange)="handleSalaryChange($event)"/>  
 </div>

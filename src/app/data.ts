@@ -26846,4 +26846,11 @@ new MapNode("100478","99901","AK","Ketchikan","Ketchikan Gateway Borough",55.540
 new MapNode("100489","99929","AK","Wrangell","Wrangell Borough",56.370751,-131.693301,252509.5312),
         ];
     }
+
+    public static getStateMappings(state: string) {
+        let stateMap = new Map<string, string>([
+            ["key1", "value1"],
+            ["key2", "value2"]
+        ]);
+    }
 }
