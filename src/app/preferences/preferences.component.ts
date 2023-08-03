@@ -18,6 +18,8 @@ import { Component, Output, EventEmitter} from '@angular/core';
 export class PreferencesComponent {
   @Output() majorChange = new EventEmitter<string>();
   @Output() lifestyleChange = new EventEmitter<string>();
+  @Output() stateChange = new EventEmitter<string>();
+  @Output() salaryChange = new EventEmitter<number>();
   
   salary: number = 0;
 
