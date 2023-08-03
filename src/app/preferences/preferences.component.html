@@ -1,12 +1,17 @@
 <div class="prefContainer">
   <h2>Preferences</h2>
-  <div class="prefGroup" *ngFor="let m of userPreferences">
-    <label>{{m.name}}</label>
-    <select id="{{m.name}}" [(ngModel)]="m.selectedOption" (ngModelChange)="eventChangeFunction($event)">
-      <option *ngFor="let choice of m.options" [ngValue]="choice">{{choice}} </option>
+
+  <div class="prefGroup"> 
+    <label>Major</label>
+    <select id="major" [(ngModel)]="selectedMajor" (ngModelChange)="handleMajorChange($event)">
+      <option *ngFor="let m of majors" [ngValue]="m">{{m}}</option>
     </select>
   </div>
-  <div class="salaryGroup">
-    <label>salary</label>
-    <input type="number" [(ngModel)]="salary" (ngModelChange)="handleSalaryChange($event)"/>  
+
+  <div class="prefGroup"> 
+    <label>Lifestyle</label>
+    <select id="lifestyle" [(ngModel)]="selectedLifestyle" (ngModelChange)="handleLifestyleChange($event)">
+      <option *ngFor="let l of lifestyles" [ngValue]="l">{{l}}</option>
+    </select>
+  </div>
 </div>
