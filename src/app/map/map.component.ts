@@ -45,7 +45,7 @@ import {Data} from '../data';
         }
       )
       this.nodes.forEach(n => {
-        if(counter % 5 == 0) {
+        if(counter % 100 == 0) {
           marker([n.latitude, n.longitude], {icon: myIcon}).addTo(lefletMap);
         }
         counter++;

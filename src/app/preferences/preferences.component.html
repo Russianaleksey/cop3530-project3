@@ -6,4 +6,7 @@
       <option *ngFor="let choice of m.options" [ngValue]="choice">{{choice}}</option>
     </select>
   </div>
+  <div class="salaryGroup">
+    <label>Salary</label>
+    <input type="number" [(ngModel)]="salary" />  
 </div>
