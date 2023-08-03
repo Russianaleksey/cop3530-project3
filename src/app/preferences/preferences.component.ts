@@ -19,6 +19,8 @@ export class PreferencesComponent {
   @Output() nonSalaryChangeEvent = new EventEmitter<string>();
   
   salary: number = 0;
+  majors = ['computer science', 'math', 'statistics', 'economics', 'business', 'finance', 'accounting', 'other'];
+  selectedMajor = this.majors[0];
   userPreferences: Array<UserPreference> =
     [
       new UserPreference('major', ['computer science', 'math', 'statistics', 'economics', 'business', 'finance', 'accounting', 'other']),

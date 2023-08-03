@@ -1,5 +1,13 @@
 <div class="prefContainer">
   <h2>Preferences</h2>
+
+  <div class="prefGroup"> 
+    <label>Major</label>
+    <select id="major" [(ngModel)]="selectedMajor">
+      <option *ngFor="let m of majors" [ngValue]="m">{{m}}</option>
+    </select>
+  </div>
+
   <div class="prefGroup" *ngFor="let m of userPreferences">
     <label>{{m.name}}</label>
     <select id="{{m.name}}" [(ngModel)]="m.selectedOption" (ngModelChange)="eventChangeFunction($event)">
