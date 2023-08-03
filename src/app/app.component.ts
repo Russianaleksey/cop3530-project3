@@ -14,6 +14,10 @@ export class AppComponent {
   salary: number = 0;
 
   changeMajor(event: any) {
+<<<<<<< Updated upstream
+=======
+    console.log('new major change event: ', event);
+>>>>>>> Stashed changes
     this.major = event;
   }
 
