@@ -33,6 +33,9 @@ export class AppComponent {
     this.salary = event;
   }
 
+  blah(event: any) {
+    console.log('cheese');
+  }
   
 
   // addSalary(newSalary: number) {

@@ -18,6 +18,6 @@ import { ResultsComponent } from './results/results.component';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent, PreferencesComponent, MapComponent, ResultsComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

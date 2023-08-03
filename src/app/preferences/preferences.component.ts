@@ -86,6 +86,7 @@ export class PreferencesComponent {
   handleMajorChange(event: any) {
     console.log('data sent to parent: ', event);
     this.majorChange.emit(event);
+    console.log('event emitted');
   }
 
   handleLifestyleChange(event: any) {
