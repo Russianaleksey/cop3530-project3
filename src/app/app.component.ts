@@ -14,32 +14,19 @@ export class AppComponent {
   salary: number = 0;
 
   changeMajor(event: any) {
-    console.log('new major change event: ', event);
-    this.state = event;
+    this.major = event;
   }
 
   changeLifestyle(event: any) {
-    console.log('new lifestyle change event: ', event);
     this.lifestyle = event;
   }
 
   changeState(event: any) {
-    console.log('new state change event: ', event);
     this.state = event;
   }
 
   changeSalary(event: any) {
-    console.log('new salary change event: ', event);
     this.salary = event;
   }
-
-  blah(event: any) {
-    console.log('cheese');
-  }
-  
-
-  // addSalary(newSalary: number) {
-  //   this.items.push(newSalary);
-  // }
 }
 

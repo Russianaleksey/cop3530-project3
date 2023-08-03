@@ -1,10 +1,7 @@
 <div class="components-container">
-  <app-preferences class="pref-item" (majorChange)="blah($event)"></app-preferences>
+  <app-preferences class="pref-item" (majorChange)="changeMajor($event)" (stateChange)="changeState($event)" (lifestyleChange)="changeLifestyle($event)" (salaryChange)="changeSalary($event)"></app-preferences>
 
   <my-map class="map-item"></my-map>
 
   <app-results class="result-item"></app-results>
 </div>
-
-<!-- <app-preferences (majorChange)="changeMajor($event)"></app-preferences> #this needs debugging, taken from angular documentation, data not being emitted -->
-```
