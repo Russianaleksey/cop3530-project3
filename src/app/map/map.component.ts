@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Browser, Map, map, tileLayer, marker } from 'leaflet';
+import { Browser, Map, map, tileLayer, marker, icon, } from 'leaflet';
 import {Data} from '../data';
 
 @Component({
@@ -36,8 +36,19 @@ import {Data} from '../data';
         id: 'osm-bright',
       } as any).addTo(lefletMap);
 
+      let counter: number = 0;
+      let myIcon = icon(
+        {
+          iconUrl: '../../assets/maps-and-flags.png',
+          iconSize: [5, 5],
+          shadowSize: [0, 0]
+        }
+      )
       this.nodes.forEach(n => {
-        marker([n.latitude, n.longitude]).addTo(lefletMap);
+        if(counter % 5 == 0) {
+          marker([n.latitude, n.longitude], {icon: myIcon}).addTo(lefletMap);
+        }
+        counter++;
       })
       //marker([51.5, -0.09]).addTo(lefletMap);
       //marker([40.68295, -73.97559]).addTo(lefletMap);
