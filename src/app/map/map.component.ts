@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Browser, Map, map, tileLayer, marker } from 'leaflet';
+import {Data} from '../data';
 
 @Component({
     selector: 'my-map',
@@ -10,13 +11,16 @@ import { Browser, Map, map, tileLayer, marker } from 'leaflet';
   
     @ViewChild('map')
     private mapContainer: ElementRef<HTMLElement>;
-  
-    constructor() { }
+    private nodes: Array<MapNode>;
+    constructor() {
+      this.nodes = Data.getData();
+     }
   
     ngOnInit() {
     }
   
     ngAfterViewInit() {
+
       const initialState = { lng: 11, lat: 49, zoom: 4 };
   
       const lefletMap: Map = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
@@ -32,7 +36,32 @@ import { Browser, Map, map, tileLayer, marker } from 'leaflet';
         id: 'osm-bright',
       } as any).addTo(lefletMap);
 
-      marker([51.5, -0.09]).addTo(lefletMap);
-      marker([40.68295, -73.97559]).addTo(lefletMap);
+      this.nodes.forEach(n => {
+        marker([n.latitude, n.longitude]).addTo(lefletMap);
+      })
+      //marker([51.5, -0.09]).addTo(lefletMap);
+      //marker([40.68295, -73.97559]).addTo(lefletMap);
+    }
+  }
+
+  export class MapNode {
+    regionId: string;
+    zipCode: string;
+    state: string;
+    city: string;
+    county: string;
+    latitude: number;
+    longitude: number;
+    zhvi: number;
+    
+    constructor(r: string, z: string, s: string, c: string, cou: string, lt: number, lo: number, zh: number) {
+      this.regionId = r;
+      this.zipCode = z;
+      this.city = c;
+      this.state = s;
+      this.latitude = lt;
+      this.longitude = lo;
+      this.zhvi = zh;
+      this.county = cou;
     }
   }
