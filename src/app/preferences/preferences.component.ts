@@ -31,7 +31,10 @@ export class PreferencesComponent {
       new UserPreference('lifestyle', ['outdoorsy', 'bookworm', 'scholar', 'nightlife']),
       new UserPreference('state',['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IA', 'IN', 'KS', 'KY','LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT','NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH','OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT','VT', 'VA', 'WA', 'WV', 'WI', 'WY']),
     ];
-    eventChangeFunction(event: any){
+    handleStateChange(event: any) {
+      console.log(event);
+    }
+    handleMajorChange(event: any) {
       console.log(event);
     }
     handleSalaryChange(event: any) {

@@ -3,14 +3,14 @@
 
   <div class="prefGroup"> 
     <label>Major</label>
-    <select id="major" [(ngModel)]="selectedMajor">
+    <select id="major" [(ngModel)]="selectedMajor" (ngModelChange)="handleMajorChange($event)">
       <option *ngFor="let m of majors" [ngValue]="m">{{m}}</option>
     </select>
   </div>
 
   <div class="prefGroup">
     <label>State</label>
-    <select id="state" [(ngModel)]="selectedState">
+    <select id="state" [(ngModel)]="selectedState" (ngModelChange)="handleStateChange($event)">
       <option *ngFor="let y of states" [ngValue]="y">{{y}}</option>
     </select>
   </div>
