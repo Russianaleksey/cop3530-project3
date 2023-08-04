@@ -5,3 +5,10 @@ p {
     text-align: center;
     margin-bottom: 20px;
 }
+
+.list-row-container {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    padding: 10px;
+}
