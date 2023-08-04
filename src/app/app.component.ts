@@ -8,25 +8,21 @@ import { Component } from '@angular/core';
 export class AppComponent {
   
   title = 'project2';
-  state: string = '';
-  lifestyle: string = '';
+  state: string[] = [];
+  lifestyle: string[] = [];
   major: string = '';
   salary: number = 0;
 
   changeMajor(event: any) {
-<<<<<<< Updated upstream
-=======
-    console.log('new major change event: ', event);
->>>>>>> Stashed changes
     this.major = event;
   }
 
   changeLifestyle(event: any) {
-    this.lifestyle = event;
+    this.lifestyle.push(event);
   }
 
   changeState(event: any) {
-    this.state = event;
+    this.state.push(event);
   }
 
   changeSalary(event: any) {

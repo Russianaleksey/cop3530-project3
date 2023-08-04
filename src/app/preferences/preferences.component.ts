@@ -91,23 +91,18 @@ export class PreferencesComponent implements OnInit {
   }
 
   handleMajorChange(event: any) {
-    console.log('data sent to parent: ', event);
     this.majorChange.emit(event);
-    console.log('event emitted');
   }
 
   handleLifestyleChange(event: any) {
-    console.log('data sent to parent: ', event);
     this.lifestyleChange.emit(event);
   }
 
   handleStateChange(event: any) {
-    console.log('data sent to parent: ', event);
     this.stateChange.emit(event);
   }
 
   handleSalaryChange(event: any) {
-    console.log('data sent to parent: ', event);
     this.salaryChange.emit(event);
   }
 }
