@@ -114,18 +114,19 @@ let tagMap = new Map<string, number>([
 
 
 // TODO: refactor to handle multiple options in the preferences. Did we already change above to handle multiple? idk
-// let generateScore = function (prefs: Preferences, node: MapNode, states: string[], lifestyles: string[]): number {
-//   let score = 0;
-//   if(node.tags !== null && node.tags?.length != 0) {
-//     node.tags?.forEach(t => {
-//       let val = tagMap.get(t);
-//       score += val ? val : 0;
-//     });
-//   }
-//   states.forEach(s => {
-//     if(node.state == prefs.state) {
-//       score += 1500;
-//     }
-//   });
-//   return score;
-// };
+let generateScore = function (prefs: Preferences, node: MapNode): number {
+  let score = 0;
+  if(node.tags !== null && node.tags?.length != 0) {
+    node.tags?.forEach(t => {
+      let val = tagMap.get(t);
+      score += val ? val : 0;
+    });
+  }
+
+  if(prefs.state.includes(node.state)) {
+    score += 1500;
+  }
+  let yearsToPayOff = node.zhvi / prefs.salary;
+  score += 10000/yearsToPayOff;
+  return score;
+};
