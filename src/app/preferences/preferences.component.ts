@@ -26,7 +26,7 @@ export class PreferencesComponent implements OnInit {
   ];
   selectedMajor = this.majors[0];
 
-  lifestyles = ['outdoorsy', 'bookworm', 'scholar', 'nightlife'];
+  lifestyles = ['outdoorsy', 'bookworm', 'scholar', 'nightlife', 'secluded', 'opulent', 'suburban', 'rural'];
   selectedLifestyle = this.lifestyles[0];
 
   states = [
@@ -105,4 +105,11 @@ export class PreferencesComponent implements OnInit {
   handleSalaryChange(event: any) {
     this.salaryChange.emit(event);
   }
+}
+
+export interface Preferences {
+  major: string
+  lifestyle: string
+  state: string
+  salary: number
 }
