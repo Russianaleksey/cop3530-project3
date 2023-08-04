@@ -38,20 +38,20 @@ export class maxHeapBased<T>{
         return this.mapNodes.length === 0;
     }
 
-    top(): T[] {
-        let topCities: T[] = [];
-        for (let i = 0; i < 15; i++) {
-            topCities.push(this.mapNodes[i].data);
-        }
+    // top(): T[] {
+    //     let topCities: T[] = [];
+    //     for (let i = 0; i < 10; i++) {
+    //         topCities.push(this..pop().data);
+    //     }
 
-        for (let i = 0; i < topCities.length; i++) {
-            console.log(topCities[i]);
-        }
-        return topCities;
-    }
+    //     for (let i = 0; i < 10; i++) {
+    //         console.log(topCities[i]);
+    //     }
+    //     return topCities;
+    // }
 
     heapify(index: number) {
-        let parent = Math.floor((index - 1) / 2);
+        let parent = Math.floor((index) / 2);
         if (this.mapNodes[parent] && this.mapNodes[index].priority > this.mapNodes[parent].priority) {
             [this.mapNodes[parent], this.mapNodes[index]] = [this.mapNodes[index], this.mapNodes[parent]];
             this.heapify(parent);
@@ -59,18 +59,21 @@ export class maxHeapBased<T>{
     }
 
     heapifyDown(index: number) {
-        let left = 2 * index + 1;
-        let right = 2 * index + 2;
-        let largest = index;
-        if (this.mapNodes[left] && this.mapNodes[left].priority > this.mapNodes[largest].priority) {
-            largest = left;
+        const leftChildIndex = 2 * index + 1;
+        const rightChildIndex = 2 * index + 2;
+        let largestIndex = index;
+
+        if (leftChildIndex < this.mapNodes.length && this.mapNodes[leftChildIndex] > this.mapNodes[largestIndex]) {
+        largestIndex = leftChildIndex;
         }
-        if (this.mapNodes[right] && this.mapNodes[right].priority > this.mapNodes[largest].priority) {
-            largest = right;
+
+        if (rightChildIndex < this.mapNodes.length && this.mapNodes[rightChildIndex] > this.mapNodes[largestIndex]) {
+        largestIndex = rightChildIndex;
         }
-        if (largest != index) {
-            [this.mapNodes[index], this.mapNodes[largest]] = [this.mapNodes[largest], this.mapNodes[index]];
-            this.heapifyDown(largest);
+
+        if (largestIndex !== index) {
+        [this.mapNodes[index], this.mapNodes[largestIndex]] = [this.mapNodes[largestIndex], this.mapNodes[index]];
+        this.heapifyDown(largestIndex);
         }
     }
 }

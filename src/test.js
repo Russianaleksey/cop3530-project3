@@ -22,5 +22,7 @@ test.push('q', 17);
 test.push('r', 18);
 test.push('s', 19);
 test.push('t', 20);
-var result = test.top();
-console.log('nothing works');
+for (var i = 0; i < 10; i++) {
+    console.log(test.mapNodes[i].data);
+    test.pop();
+}
