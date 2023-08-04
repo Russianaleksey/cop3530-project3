@@ -1,10 +1,10 @@
-<button (click)="changeCurrent()"><b>Random!</b></button>
 <div class="components-container">
   <app-preferences class="pref-item" (majorChange)="changeMajor($event)" (stateChange)="changeState($event)" (lifestyleChange)="changeLifestyle($event)" (salaryChange)="changeSalary($event)"></app-preferences>
 
   <my-map class="map-item"></my-map>
 
   <app-results [map]="mapComponent" class="result-item"></app-results>
+  <button (click)="changeCurrent()"><b>Random!</b></button>
 </div>
 
 
