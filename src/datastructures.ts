@@ -38,17 +38,21 @@ export class maxHeapBased<T>{
         return this.mapNodes.length === 0;
     }
 
-    // top(): T[] {
-    //     let topCities: T[] = [];
-    //     for (let i = 0; i < 10; i++) {
-    //         topCities.push(this..pop().data);
-    //     }
+     topNDataOnly(n: number): T[] {
+         let topCities: T[] = [];
+         for (let i = 0; i < n; i++) {
+             topCities.push(this.mapNodes[i].data);
+        }
+        return topCities;
+     }
 
-    //     for (let i = 0; i < 10; i++) {
-    //         console.log(topCities[i]);
-    //     }
-    //     return topCities;
-    // }
+     topNWithPriority(n: number) {
+        let topCities: Array<{priority: number;  data: T}>  = [];
+        for (let i = 0; i < n; i++) {
+            topCities.push(this.mapNodes[i]);
+       }
+       return topCities;
+    }
 
     heapify(index: number) {
         let parent = Math.floor((index) / 2);

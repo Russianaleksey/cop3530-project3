@@ -53,9 +53,19 @@ export class AppComponent implements OnInit {
       this.quicksortDS.push(randomPriority, randomMapNode);
     }
     let p = this.quicksortDS.getTopNNodesOnly(10);
-    let pq = this.priorityQueue.top(10);
+    let pq = this.priorityQueue.topNDataOnly(10);
+    
+
+    let quicksort = this.quicksortDS.getTopNWithPriority(10);
+    let pqWithPrio = this.priorityQueue.topNWithPriority(10);
+
+    console.log("Priority queue results: \n");
     for (let i = 0; i < pq.length; ++i)
-      console.log(pq[i].city);
+      console.log(`City: ${pqWithPrio[i].data.city}, Priority: ${pqWithPrio[i].priority}`);
+
+    console.log("\n\nQuickSort results: \n");
+    for (let i = 0; i < p.length; ++i)
+      console.log(`City: ${quicksort[i].data.city}, Priority: ${quicksort[i].priority}`);
     this.mapComponent.refreshMarkers(p);
   }
 }
