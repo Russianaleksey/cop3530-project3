@@ -116,10 +116,11 @@ let generateScore = function (prefs: Preferences, node: MapNode): number {
       score += val ? val : 0;
     });
   }
-  // TODO: refactor to iterate through all preferred states
-  if(node.state == prefs.state) {
+
+  if(prefs.state.includes(node.state)) {
     score += 1500;
   }
   let yearsToPayOff = node.zhvi / prefs.salary;
+  score += 10000/yearsToPayOff;
   return score;
 };
