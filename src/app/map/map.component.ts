@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leaflet';
-import {Data} from '../data';
 
 @Component({
     selector: 'my-map',
@@ -8,17 +7,8 @@ import {Data} from '../data';
     styleUrls: ['./map.component.css']
   })
   export class MapComponent implements OnInit, AfterViewInit {
-    _currNodes: Array<MapNode> = [];
-    get currNodes(): Array<MapNode> {
-      return this._currNodes;
-    };
-    @Input() set currNodes(currentNodes: Array<MapNode>) {
-      console.log(currentNodes)
-      currentNodes.forEach(n => {
-        this._currNodes.push(n);
-      });
-      this.refreshMarkers();
-    }
+    currNodes: Array<MapNode> = [];
+    
 
     @ViewChild('map')
     private mapContainer: ElementRef<HTMLElement>;
@@ -31,18 +21,18 @@ import {Data} from '../data';
       this.myIcon = icon(
         {
             iconUrl: '../../assets/maps-and-flags.png',
-            iconSize: [5, 5],
+            iconSize: [50, 50],
             shadowSize: [0, 0]
           }
-        )
+        );
+
+        this.currentMarkers = new Array<Marker>();
      }
   
     ngOnInit() {
-      this.currentMarkers = new Array<Marker>();
     }
 
     ngAfterViewInit() {
-
       const initialState = { lng: 11, lat: 49, zoom: 4 };
   
       this.lefletMap = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
@@ -59,15 +49,18 @@ import {Data} from '../data';
       } as any).addTo(this.lefletMap);
     }
 
-    refreshMarkers() {
+    refreshMarkers(nodes: Array<MapNode>) {
       this.currentMarkers.forEach(m => {
         this.lefletMap.removeLayer(m)
       })
       this.currentMarkers = []
+      this.currNodes = nodes;
       this.currNodes.forEach(n => {
         let m = marker([n.latitude, n.longitude], {icon: this.myIcon});
         this.currentMarkers.push(m);
-        m.addTo(this.lefletMap);
+        if(this.lefletMap != undefined){
+          this.lefletMap.addLayer(m);
+        }
       })
     }
   }

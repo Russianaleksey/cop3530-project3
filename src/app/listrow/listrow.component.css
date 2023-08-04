@@ -1,0 +1,7 @@
+p {
+    border-color: black;
+    border-width: 5px;
+    border-style: solid;
+    text-align: center;
+    margin-bottom: 20px;
+}
