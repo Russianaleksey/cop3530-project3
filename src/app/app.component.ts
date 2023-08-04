@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Preferences } from './preferences/preferences.component';
 import { MapComponent, MapNode } from './map/map.component';
 import { Data } from './data';
-
+import { CustomSorting } from 'src/datastructures';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,16 +12,17 @@ export class AppComponent implements OnInit {
   @ViewChild(MapComponent)
   mapComponent: MapComponent;
 
-  title = 'project2';
+  title = 'MoveAdvisor';
   state: string[] = [];
   lifestyle: string[] = [];
   major: string = '';
   salary: number = 0;
   allData: Array<MapNode> = Data.getData();
-  currentNodes: Array<MapNode>;
+  currentNodes: Array<MapNode>=  [];
+  quicksortDS: CustomSorting<MapNode>;
 
   ngOnInit(): void {
-    this.currentNodes = [this.allData[0]]
+    this.quicksortDS = new CustomSorting<MapNode>();
   }
   changeMajor(event: any) {
     this.major = event;
@@ -41,13 +42,17 @@ export class AppComponent implements OnInit {
 
   changeCurrent() {
     this.currentNodes = []
+    this.quicksortDS.empty();
     for(let i = 0; i < 20; i++) {
-      this.currentNodes.push(this.allData[Math.floor(Math.random() * this.allData.length)]);
+      let randomMapNode = this.allData[Math.floor(Math.random() * this.allData.length)];
+      let randomPriority = Math.floor(Math.random() * 50000);
+      this.currentNodes.push(randomMapNode);
+      this.quicksortDS.push(randomPriority, randomMapNode);
     }
-    this.mapComponent.refreshMarkers(this.currentNodes);
+    let p = this.quicksortDS.getTopNNodesOnly(10);
+    this.mapComponent.refreshMarkers(p);
   }
 }
-//'outdoorsy', 'bookworm', 'scholar', 'nightlife', 'secluded', 'opulent', 'suburban', 'rural'
 let tagMap = new Map<string, number>([
   ['high-tech', 1000],
   ['medium-tech', 800],
@@ -63,6 +68,8 @@ let tagMap = new Map<string, number>([
   ['opulent', 600]
 ]);
 
+
+// TODO: refactor to handle multiple options in the preferences. Did we already change above to handle multiple? idk
 let generateScore = function (prefs: Preferences, node: MapNode): number {
   let score = 0;
   if(node.tags !== null && node.tags?.length != 0) {
@@ -76,7 +83,5 @@ let generateScore = function (prefs: Preferences, node: MapNode): number {
     score += 1500;
   }
   let yearsToPayOff = node.zhvi / prefs.salary;
-
-
   return score;
 };
