@@ -8,7 +8,6 @@ import { Data } from '../data';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent {
-  // TempList: MapNode[];
   tempNode1 = new MapNode(
     '58196',
     '01001',

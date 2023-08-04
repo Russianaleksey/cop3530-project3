@@ -11,8 +11,8 @@ import { Data } from './data';
 export class AppComponent implements OnInit {
   
   title = 'project2';
-  state: string = '';
-  lifestyle: string = '';
+  state: string[] = [];
+  lifestyle: string[] = [];
   major: string = '';
   salary: number = 0;
   allData: Array<MapNode> = Data.getData();
@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
   }
 
   changeLifestyle(event: any) {
-    this.lifestyle = event;
+    this.lifestyle.push(event);
   }
 
   changeState(event: any) {
-    this.state = event;
+    this.state.push(event);
   }
 
   changeSalary(event: any) {
