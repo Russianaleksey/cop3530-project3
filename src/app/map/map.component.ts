@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Browser, Map, map, tileLayer, marker, icon, } from 'leaflet';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leaflet';
 import {Data} from '../data';
 
 @Component({
@@ -8,22 +8,44 @@ import {Data} from '../data';
     styleUrls: ['./map.component.css']
   })
   export class MapComponent implements OnInit, AfterViewInit {
-  
+    _currNodes: Array<MapNode> = [];
+    get currNodes(): Array<MapNode> {
+      return this._currNodes;
+    };
+    @Input() set currNodes(currentNodes: Array<MapNode>) {
+      console.log(currentNodes)
+      currentNodes.forEach(n => {
+        this._currNodes.push(n);
+      });
+      this.refreshMarkers();
+    }
+
     @ViewChild('map')
     private mapContainer: ElementRef<HTMLElement>;
-    private nodes: Array<MapNode>;
+    private lefletMap: Map;
+
+    private currentMarkers: Array<Marker>;
+    private myIcon: Icon;
+
     constructor() {
-      this.nodes = Data.getData();
+      this.myIcon = icon(
+        {
+            iconUrl: '../../assets/maps-and-flags.png',
+            iconSize: [5, 5],
+            shadowSize: [0, 0]
+          }
+        )
      }
   
     ngOnInit() {
+      this.currentMarkers = new Array<Marker>();
     }
-  
+
     ngAfterViewInit() {
 
       const initialState = { lng: 11, lat: 49, zoom: 4 };
   
-      const lefletMap: Map = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
+      this.lefletMap = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
   
       const isRetina = Browser.retina;
       const baseUrl = "https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey={apiKey}";
@@ -34,24 +56,19 @@ import {Data} from '../data';
         apiKey: 'ca297971d1624f8f990e85b6d0d27118',
         maxZoom: 20,
         id: 'osm-bright',
-      } as any).addTo(lefletMap);
+      } as any).addTo(this.lefletMap);
+    }
 
-      let counter: number = 0;
-      let myIcon = icon(
-        {
-          iconUrl: '../../assets/maps-and-flags.png',
-          iconSize: [5, 5],
-          shadowSize: [0, 0]
-        }
-      )
-      this.nodes.forEach(n => {
-        if(counter % 25000 == 0) {
-          marker([n.latitude, n.longitude], {icon: myIcon}).addTo(lefletMap);
-        }
-        counter++;
+    refreshMarkers() {
+      this.currentMarkers.forEach(m => {
+        this.lefletMap.removeLayer(m)
       })
-      //marker([51.5, -0.09]).addTo(lefletMap);
-      //marker([40.68295, -73.97559]).addTo(lefletMap);
+      this.currentMarkers = []
+      this.currNodes.forEach(n => {
+        let m = marker([n.latitude, n.longitude], {icon: this.myIcon});
+        this.currentMarkers.push(m);
+        m.addTo(this.lefletMap);
+      })
     }
   }
 
@@ -64,8 +81,9 @@ import {Data} from '../data';
     latitude: number;
     longitude: number;
     zhvi: number;
+    tags?: Array<string>;
     
-    constructor(r: string, z: string, s: string, c: string, cou: string, lt: number, lo: number, zh: number) {
+    constructor(r: string, z: string, s: string, c: string, cou: string, lt: number, lo: number, zh: number, tagArray?: Array<string>) {
       this.regionId = r;
       this.zipCode = z;
       this.city = c;
