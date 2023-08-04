@@ -6,7 +6,7 @@ var maxHeapBased = /** @class */ (function () {
         this.mapNodes = [];
     }
     maxHeapBased.prototype.push = function (node, priority) {
-        this.mapNodes.push({ priority: priority, data: node });
+        this.mapNodes.push({ data: node, priority: priority });
         this.heapify(this.mapNodes.length - 1);
     };
     maxHeapBased.prototype.pop = function () {
@@ -14,7 +14,7 @@ var maxHeapBased = /** @class */ (function () {
             return undefined;
         }
         var result = this.mapNodes[0].data;
-        var end = this.mapNodes.pop();
+        var end = this.mapNodes[this.mapNodes.length - 1];
         if (this.mapNodes.length > 0 && end) {
             this.mapNodes[0] = end;
             this.heapifyDown(0);
@@ -33,19 +33,25 @@ var maxHeapBased = /** @class */ (function () {
     maxHeapBased.prototype.isEmpty = function () {
         return this.mapNodes.length === 0;
     };
-    // top(): T[] {
-    //     let topCities: T[] = [];
-    //     for (let i = 0; i < 10; i++) {
-    //         topCities.push(this..pop().data);
-    //     }
-    //     for (let i = 0; i < 10; i++) {
-    //         console.log(topCities[i]);
-    //     }
-    //     return topCities;
-    // }
+    maxHeapBased.prototype.topNDataOnly = function (n) {
+        var topCities = [];
+        for (var i = 0; i < n; i++) {
+            topCities.push(this.mapNodes[i].data);
+        }
+        return topCities;
+    };
+    maxHeapBased.prototype.topNWithPriority = function (n) {
+        var topCities = [];
+        for (var i = 0; i < n; i++) {
+            topCities.push(this.mapNodes[i]);
+        }
+        return topCities;
+    };
     maxHeapBased.prototype.heapify = function (index) {
         var _a;
-        var parent = Math.floor((index) / 2);
+        if (index === 0)
+            return;
+        var parent = Math.floor((index - 1) / 2);
         if (this.mapNodes[parent] && this.mapNodes[index].priority > this.mapNodes[parent].priority) {
             _a = [this.mapNodes[index], this.mapNodes[parent]], this.mapNodes[parent] = _a[0], this.mapNodes[index] = _a[1];
             this.heapify(parent);
@@ -56,10 +62,10 @@ var maxHeapBased = /** @class */ (function () {
         var leftChildIndex = 2 * index + 1;
         var rightChildIndex = 2 * index + 2;
         var largestIndex = index;
-        if (leftChildIndex < this.mapNodes.length && this.mapNodes[leftChildIndex] > this.mapNodes[largestIndex]) {
+        if (leftChildIndex < this.mapNodes.length && this.mapNodes[leftChildIndex].priority > this.mapNodes[largestIndex].priority) {
             largestIndex = leftChildIndex;
         }
-        if (rightChildIndex < this.mapNodes.length && this.mapNodes[rightChildIndex] > this.mapNodes[largestIndex]) {
+        if (rightChildIndex < this.mapNodes.length && this.mapNodes[rightChildIndex].priority > this.mapNodes[largestIndex].priority) {
             largestIndex = rightChildIndex;
         }
         if (largestIndex !== index) {
