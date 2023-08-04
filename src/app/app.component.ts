@@ -12,19 +12,17 @@ export class AppComponent implements OnInit {
   @ViewChild(MapComponent)
   mapComponent: MapComponent;
 
-  title = 'project2';
+  title = 'MoveAdvisor';
   state: string[] = [];
   lifestyle: string[] = [];
   major: string = '';
   salary: number = 0;
   allData: Array<MapNode> = Data.getData();
-  currentNodes: Array<MapNode>;
+  currentNodes: Array<MapNode>=  [];
   quicksortDS: CustomSorting<MapNode>;
 
   ngOnInit(): void {
     this.quicksortDS = new CustomSorting<MapNode>();
-    this.currentNodes = [this.allData[0], this.allData[100], this.allData[500]];
-
   }
   changeMajor(event: any) {
     this.major = event;
@@ -70,6 +68,8 @@ let tagMap = new Map<string, number>([
   ['opulent', 600]
 ]);
 
+
+// TODO: refactor to handle multiple options in the preferences. Did we already change above to handle multiple? idk
 let generateScore = function (prefs: Preferences, node: MapNode): number {
   let score = 0;
   if(node.tags !== null && node.tags?.length != 0) {
