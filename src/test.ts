@@ -1,12 +1,5 @@
-import { maxHeapBased } from './datastructures';
-const test = new maxHeapBased();
-
-test.setTemp();
+import { ShellSort } from './datastructures';
+const test = new ShellSort();
 
 
 
-for (let i = 0; i < 10; i++) 
-{
-    console.log(test.peek());
-    test.pop();
-}

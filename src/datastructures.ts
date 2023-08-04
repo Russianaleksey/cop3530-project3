@@ -1,92 +1,48 @@
-export class maxHeapBased<T>{
-    mapNodes: { priority: number;  data: T } [];
-    temp: { priority: number;  data: T } [];
-    
+export class ShellSort<T> {
+    mapNodes: { priority: number; data: T }[];
+
     constructor() {
         this.mapNodes = [];
-        this.temp = [];
     }
-    
+
     push(node: any, priority: number) {
-        this.mapNodes.push({data: node, priority: priority});
-        this.heapify(this.mapNodes.length - 1);
+        this.mapNodes.push({ data: node, priority: priority });
     }
 
-    pop(): T | undefined {
-        if(this.mapNodes.length === 0) {
-            return undefined;
+    sort() {
+        const n = this.mapNodes.length;
+        let gap = Math.floor(n / 2);
+        while (gap > 0) {
+            for (let i = gap; i < n; i++) {
+                const temp = this.mapNodes[i];
+                let j = i;
+                while (j >= gap && this.mapNodes[j - gap].priority < temp.priority) {
+                    this.mapNodes[j] = this.mapNodes[j - gap];
+                    j -= gap;
+                }
+                this.mapNodes[j] = temp;
+            }
+            gap = Math.floor(gap / 2);
         }
-        const result = this.mapNodes[0].data;
-        const end = this.mapNodes[this.mapNodes.length - 1];
-        if(this.mapNodes.length > 0 && end) {
-            this.mapNodes[0] = end;
-            this.heapifyDown(0);
-        }
-        return result;
-    }
-
-    peek(): any {
-        if(this.mapNodes.length === 0) {
-            return undefined;
-        }
-        return this.mapNodes[0].data;
-    }
-    
-    size(): number {
-        return this.mapNodes.length;
-    }
-
-    isEmpty(): boolean {
-        return this.mapNodes.length === 0;
     }
 
     topNDataOnly(n: number): T[] {
-         let topCities: T[] = [];
-         for (let i = 0; i < n; i++) {
-             topCities.push(this.mapNodes[i].data);
+        this.sort();
+        let topCities: T[] = [];
+        for (let i = 0; i < n && i < this.mapNodes.length; i++) {
+            topCities.push(this.mapNodes[i].data);
         }
         return topCities;
-     }
-
-     topNWithPriority(n: number) {
-        let topCities: Array<{priority: number;  data: T}>  = [];
-        for (let i = 0; i < n; i++) {
-            topCities.push(this.mapNodes[i]);
-       }
-       return topCities;
     }
 
-    heapify(index: number) {
-        if (index === 0) return;
-        
-        let parent = Math.floor((index - 1) / 2);
-        if (this.mapNodes[parent] && this.mapNodes[index].priority > this.mapNodes[parent].priority) {
-            [this.mapNodes[parent], this.mapNodes[index]] = [this.mapNodes[index], this.mapNodes[parent]];
-            this.heapify(parent);
-        }
+    topNWithPriority(n: number) {
+        this.sort();
+        return this.mapNodes.slice(0, n);
     }
 
-    heapifyDown(index: number) {
-        const leftChildIndex = 2 * index + 1;
-        const rightChildIndex = 2 * index + 2;
-        let largestIndex = index;
-
-        if (leftChildIndex < this.mapNodes.length && this.mapNodes[leftChildIndex].priority > this.mapNodes[largestIndex].priority) {
-            largestIndex = leftChildIndex;
-        }
-
-        if (rightChildIndex < this.mapNodes.length && this.mapNodes[rightChildIndex].priority > this.mapNodes[largestIndex].priority) {
-            largestIndex = rightChildIndex;
-        }
-
-        if (largestIndex !== index) {
-            [this.mapNodes[index], this.mapNodes[largestIndex]] = [this.mapNodes[largestIndex], this.mapNodes[index]];
-            this.heapifyDown(largestIndex);
-        }
-    }
-
-    setTemp(): void {
-        this.temp = this.mapNodes;
+    getAllWithPriority() {
+        this.sort();
+        return this.mapNodes;
     }
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Preferences } from './preferences/preferences.component';
 import { MapComponent, MapNode } from './map/map.component';
 import { Data } from './data';
-import { CustomSorting, maxHeapBased } from 'src/datastructures';
+import { CustomSorting, ShellSort } from 'src/datastructures';
 import { ResultsComponent } from './results/results.component';
 @Component({
   selector: 'app-root',
@@ -24,11 +24,11 @@ export class AppComponent implements OnInit {
   allData: Array<MapNode> = Data.getData();
   currentNodes: Array<MapNode>=  [];
   quicksortDS: CustomSorting<MapNode>;
-  priorityQueue: maxHeapBased<MapNode>; 
+  shellSort: ShellSort<MapNode>;
 
   ngOnInit(): void {
     this.quicksortDS = new CustomSorting<MapNode>();
-    this.priorityQueue = new maxHeapBased<MapNode>();
+    this.shellSort = new ShellSort<MapNode>();
   }
   changeMajor(event: any) {
     this.major = event;
@@ -58,18 +58,18 @@ export class AppComponent implements OnInit {
       let randomMapNode = this.allData[Math.floor(Math.random() * this.allData.length)];
       let randomPriority = Math.floor(Math.random() * 50000);
       this.currentNodes.push(randomMapNode);
-      this.priorityQueue.push(randomMapNode, randomPriority);
+      this.shellSort.push(randomMapNode, randomPriority);
       this.quicksortDS.push(randomPriority, randomMapNode);
     }
     let p = this.quicksortDS.getTopNNodesOnly(10);
-    let pq = this.priorityQueue.topNDataOnly(10);
+    let pq = this.shellSort.topNDataOnly(10);
     this.resultsComponent.propegateNodes(p);
     
 
     let quicksort = this.quicksortDS.getTopNWithPriority(10);
-    let pqWithPrio = this.priorityQueue.topNWithPriority(10);
+    let pqWithPrio = this.shellSort.topNWithPriority(10);
 
-    console.log("Priority queue results: \n");
+    console.log("ShellSort results: \n");
     for (let i = 0; i < pq.length; ++i)
       console.log(`City: ${pqWithPrio[i].data.city}, Priority: ${pqWithPrio[i].priority}`);
 
@@ -77,6 +77,18 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < p.length; ++i)
       console.log(`City: ${quicksort[i].data.city}, Priority: ${quicksort[i].priority}`);
     this.mapComponent.refreshMarkers(p);
+
+
+    let check = this.quicksortDS.getAllWithPriority();
+    let check2 = this.shellSort.getAllWithPriority();
+
+    let b = true;
+    for (let i = 0; i < check.length; ++i)
+    {
+      if (check[i].priority != check2[i].priority)
+         b = false;
+    }
+    console.log(b);
   }
 }
 let tagMap = new Map<string, number>([

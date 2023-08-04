@@ -4,6 +4,7 @@ exports.CustomSorting = exports.maxHeapBased = void 0;
 var maxHeapBased = /** @class */ (function () {
     function maxHeapBased() {
         this.mapNodes = [];
+        this.temp = [];
     }
     maxHeapBased.prototype.push = function (node, priority) {
         this.mapNodes.push({ data: node, priority: priority });
@@ -72,6 +73,9 @@ var maxHeapBased = /** @class */ (function () {
             _a = [this.mapNodes[largestIndex], this.mapNodes[index]], this.mapNodes[index] = _a[0], this.mapNodes[largestIndex] = _a[1];
             this.heapifyDown(largestIndex);
         }
+    };
+    maxHeapBased.prototype.setTemp = function () {
+        this.temp = this.mapNodes;
     };
     return maxHeapBased;
 }());
