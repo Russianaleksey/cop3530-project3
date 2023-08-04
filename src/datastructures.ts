@@ -4,7 +4,7 @@ export class maxHeapBased<T>{
     constructor() {
         this.mapNodes = [];
     }
-
+    
     push(node: any, priority: number) {
         this.mapNodes.push({priority: priority, data: node});
         this.heapify(this.mapNodes.length - 1);

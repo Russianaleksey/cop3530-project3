@@ -1,6 +1,7 @@
-import { maxHeapBased } from './datastructures';
-const test = new maxHeapBased();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var datastructures_1 = require("./datastructures");
+var test = new datastructures_1.maxHeapBased();
 test.push('a', 1);
 test.push('b', 2);
 test.push('c', 3);
@@ -21,6 +22,5 @@ test.push('q', 17);
 test.push('r', 18);
 test.push('s', 19);
 test.push('t', 20);
-
-let result = test.top();
+var result = test.top();
 console.log('nothing works');
