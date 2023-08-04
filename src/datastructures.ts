@@ -129,14 +129,26 @@ export class CustomSorting<T> {
         this.sortedSinceLastPush = true;
     }
 
-    getAll() {
+    getAllWithPriority() {
         if(this.sortedSinceLastPush == false) {
             this.sort();
         }
         return this.dataNodes;
     }
 
-    getTopN(n: number) {
+    getAllNodesOnly() {
+        if(this.sortedSinceLastPush == false) {
+            this.sort();
+        }
+        let res: Array<T> = [];
+        for(let i = 0; i < this.dataNodes.length; i++) {
+            res.push(this.dataNodes[i].data);
+        }
+        return res;
+    }
+
+
+    getTopNWithPriority(n: number) {
         if(this.sortedSinceLastPush == false) {
             this.sort();
         }
@@ -144,6 +156,17 @@ export class CustomSorting<T> {
         for(let i = 0; i < n; i++) {
             res.push(this.dataNodes[i]);
         }   
+        return res;
+    }
+
+    getTopNNodesOnly(n : number) {
+        if(this.sortedSinceLastPush == false) {
+            this.sort();
+        }
+        let res: Array<T> = [];
+        for(let i = 0; i < n; i++) {
+            res.push(this.dataNodes[i].data);
+        }
         return res;
     }
 }

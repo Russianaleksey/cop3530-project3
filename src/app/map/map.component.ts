@@ -62,6 +62,9 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
           this.lefletMap.addLayer(m);
         }
       })
+      if(this.lefletMap != undefined) {
+        this.lefletMap.setView([this.currNodes[0].latitude, this.currNodes[0].longitude], 6);
+      }
     }
   }
 

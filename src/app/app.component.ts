@@ -51,14 +51,10 @@ export class AppComponent implements OnInit {
       this.currentNodes.push(randomMapNode);
       this.quicksortDS.push(randomPriority, randomMapNode);
     }
-    this.mapComponent.refreshMarkers(this.currentNodes);
-    let p = this.quicksortDS.getTopN(10);
-    p.forEach(l => {
-      console.log("Priority: " + l.priority + ", mapNode: " + l.data.zhvi);
-    })
+    let p = this.quicksortDS.getTopNNodesOnly(10);
+    this.mapComponent.refreshMarkers(p);
   }
 }
-//'outdoorsy', 'bookworm', 'scholar', 'nightlife', 'secluded', 'opulent', 'suburban', 'rural'
 let tagMap = new Map<string, number>([
   ['high-tech', 1000],
   ['medium-tech', 800],
@@ -87,7 +83,5 @@ let generateScore = function (prefs: Preferences, node: MapNode): number {
     score += 1500;
   }
   let yearsToPayOff = node.zhvi / prefs.salary;
-
-
   return score;
 };
