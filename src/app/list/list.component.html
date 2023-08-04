@@ -1,2 +1,3 @@
-<p>list works!</p>
-
+<ul *ngFor="let node of nodes">
+    <li><app-listrow [node]="node"></app-listrow></li>
+</ul>

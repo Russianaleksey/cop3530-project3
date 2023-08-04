@@ -57,7 +57,7 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
       this.currNodes = nodes;
       this.currNodes.forEach(n => {
         let m = marker([n.latitude, n.longitude], {icon: this.myIcon});
-        let toolTipText = `${n.city}, ${n.state}<br />`;
+        let toolTipText = `${n.city != '' ? n.city : '{missing_city_name}'}, ${n.state}<br />`;
         toolTipText += `Zip: ${n.zipCode}<br />`;
         toolTipText += `Average home value (ZHVI): ${n.zhvi.toFixed(0)}<br />`;
         if(n.tags != undefined && n.tags.length > 0) {

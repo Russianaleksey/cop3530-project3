@@ -7,12 +7,14 @@ import { PreferencesComponent } from './preferences/preferences.component';
 import { MapComponent } from './map/map.component';
 import { ResultsComponent } from './results/results.component';
 import { ListrowComponent } from './listrow/listrow.component';
+import { ListComponent } from './list/list.component';
 @NgModule({
   declarations: [
     AppComponent,
     PreferencesComponent,
     MapComponent,
     ResultsComponent,
+    ListComponent,
     ListrowComponent
   ],
   imports: [

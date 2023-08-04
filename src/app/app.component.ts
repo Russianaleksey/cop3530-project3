@@ -3,6 +3,7 @@ import { Preferences } from './preferences/preferences.component';
 import { MapComponent, MapNode } from './map/map.component';
 import { Data } from './data';
 import { CustomSorting, maxHeapBased } from 'src/datastructures';
+import { ResultsComponent } from './results/results.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +12,9 @@ import { CustomSorting, maxHeapBased } from 'src/datastructures';
 export class AppComponent implements OnInit {
   @ViewChild(MapComponent)
   mapComponent: MapComponent;
+
+  @ViewChild(ResultsComponent)
+  resultsComponent: ResultsComponent;
 
   title = 'MoveAdvisor';
   state: string[] = [];
@@ -43,6 +47,11 @@ export class AppComponent implements OnInit {
   }
 
   changeCurrent() {
+    let count = 0;
+    for(let i = 0; i < this.allData.length; i++) {
+      count += this.allData[i].city == '' ? 1 : 0;
+    }
+    console.log("Number of nodes with no city: " + count);
     this.currentNodes = []
     this.quicksortDS.empty();
     for(let i = 0; i < 20; i++) {
@@ -54,6 +63,7 @@ export class AppComponent implements OnInit {
     }
     let p = this.quicksortDS.getTopNNodesOnly(10);
     let pq = this.priorityQueue.topNDataOnly(10);
+    this.resultsComponent.propegateNodes(p);
     
 
     let quicksort = this.quicksortDS.getTopNWithPriority(10);
