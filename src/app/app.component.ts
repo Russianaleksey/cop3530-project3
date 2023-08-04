@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Preferences } from './preferences/preferences.component';
 import { MapComponent, MapNode } from './map/map.component';
 import { Data } from './data';
-
+import { CustomSorting } from 'src/datastructures';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,9 +19,12 @@ export class AppComponent implements OnInit {
   salary: number = 0;
   allData: Array<MapNode> = Data.getData();
   currentNodes: Array<MapNode>;
+  quicksortDS: CustomSorting<MapNode>;
 
   ngOnInit(): void {
-    this.currentNodes = [this.allData[0]]
+    this.quicksortDS = new CustomSorting<MapNode>();
+    this.currentNodes = [this.allData[0], this.allData[100], this.allData[500]];
+
   }
   changeMajor(event: any) {
     this.major = event;
@@ -41,10 +44,18 @@ export class AppComponent implements OnInit {
 
   changeCurrent() {
     this.currentNodes = []
+    this.quicksortDS.empty();
     for(let i = 0; i < 20; i++) {
-      this.currentNodes.push(this.allData[Math.floor(Math.random() * this.allData.length)]);
+      let randomMapNode = this.allData[Math.floor(Math.random() * this.allData.length)];
+      let randomPriority = Math.floor(Math.random() * 50000);
+      this.currentNodes.push(randomMapNode);
+      this.quicksortDS.push(randomPriority, randomMapNode);
     }
     this.mapComponent.refreshMarkers(this.currentNodes);
+    let p = this.quicksortDS.getTopN(10);
+    p.forEach(l => {
+      console.log("Priority: " + l.priority + ", mapNode: " + l.data.zhvi);
+    })
   }
 }
 //'outdoorsy', 'bookworm', 'scholar', 'nightlife', 'secluded', 'opulent', 'suburban', 'rural'
