@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MapNode } from '../map/map.component';
+import { MapComponent, MapNode } from '../map/map.component';
 import { ListrowComponent } from '../listrow/listrow.component';
 
 @Component({
@@ -8,9 +8,14 @@ import { ListrowComponent } from '../listrow/listrow.component';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent {
+  @Input() map: MapComponent;
   nodes: Array<MapNode> = [];
   setCurrentNodes(nList: Array<MapNode>) {
     this.nodes = nList;
+  }
+
+  handleListRowClick(event: any) {
+    console.log(event)
   }
 }
 

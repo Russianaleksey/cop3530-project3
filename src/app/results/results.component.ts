@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MapNode } from '../map/map.component';
+import { Component, ViewChild, Input } from '@angular/core';
+import { MapComponent, MapNode } from '../map/map.component';
 import { Data } from '../data';
 import { ListComponent } from '../list/list.component';
 
@@ -11,6 +11,8 @@ import { ListComponent } from '../list/list.component';
 export class ResultsComponent {
   @ViewChild(ListComponent)
   listComponent: ListComponent
+
+  @Input() map: MapComponent;
 
   propegateNodes(nodes: Array<MapNode>) {
     this.listComponent.setCurrentNodes(nodes);

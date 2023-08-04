@@ -33,7 +33,7 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
     }
 
     ngAfterViewInit() {
-      const initialState = { lng: 11, lat: 49, zoom: 4 };
+      const initialState = { lng: -98.35, lat: 37.50, zoom: 5 };
   
       this.lefletMap = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
   

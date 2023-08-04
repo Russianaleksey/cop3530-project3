@@ -3,7 +3,7 @@
 
   <my-map class="map-item"></my-map>
 
-  <app-results class="result-item"></app-results>
+  <app-results [map]="mapComponent" class="result-item"></app-results>
 </div>
 
 <button (click)="changeCurrent()">Randomize Nodes</button>
