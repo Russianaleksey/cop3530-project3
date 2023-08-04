@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Preferences } from './preferences/preferences.component';
 import { MapComponent, MapNode } from './map/map.component';
 import { Data } from './data';
-import { CustomSorting } from 'src/datastructures';
+import { CustomSorting, maxHeapBased } from 'src/datastructures';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,9 +20,11 @@ export class AppComponent implements OnInit {
   allData: Array<MapNode> = Data.getData();
   currentNodes: Array<MapNode>=  [];
   quicksortDS: CustomSorting<MapNode>;
+  priorityQueue: maxHeapBased<MapNode>; 
 
   ngOnInit(): void {
     this.quicksortDS = new CustomSorting<MapNode>();
+    this.priorityQueue = new maxHeapBased<MapNode>();
   }
   changeMajor(event: any) {
     this.major = event;
@@ -47,9 +49,13 @@ export class AppComponent implements OnInit {
       let randomMapNode = this.allData[Math.floor(Math.random() * this.allData.length)];
       let randomPriority = Math.floor(Math.random() * 50000);
       this.currentNodes.push(randomMapNode);
+      this.priorityQueue.push(randomMapNode, randomPriority);
       this.quicksortDS.push(randomPriority, randomMapNode);
     }
     let p = this.quicksortDS.getTopNNodesOnly(10);
+    let pq = this.priorityQueue.top(10);
+    for (let i = 0; i < pq.length; ++i)
+      console.log(pq[i].city);
     this.mapComponent.refreshMarkers(p);
   }
 }

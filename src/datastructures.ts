@@ -38,9 +38,9 @@ export class maxHeapBased<T>{
         return this.mapNodes.length === 0;
     }
 
-    top(): T[] {
+    top(n: number): T[] {
         let topCities: T[] = [];
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < n; i++) {
             topCities.push(this.mapNodes[i].data);
         }
 
