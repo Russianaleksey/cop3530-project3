@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
     this.currentNodes = [this.allData[0]]
   }
   changeMajor(event: any) {
+<<<<<<< Updated upstream
+=======
+    console.log('new major change event: ', event);
+>>>>>>> Stashed changes
     this.major = event;
   }
 
