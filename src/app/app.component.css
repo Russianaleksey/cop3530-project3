@@ -9,6 +9,8 @@ html, body {
 .components-container {
   margin-left: 3vw;
   margin-right: 3vw;
+  margin-top: 0px;
+
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -32,7 +34,12 @@ html, body {
 }
 
 button {
-  height: 200px;
-  width: 200px;
-  background-color: red;
+  height: 100px;
+  width: 120px;
+  background-color: 	rgb(135,206,235);
+  position: absolute;
+  top: 66vh;
+  left: 3vw;
+  cursor: pointer;
+  border-radius: 10px;
 }

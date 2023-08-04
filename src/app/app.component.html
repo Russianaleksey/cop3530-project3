@@ -1,3 +1,4 @@
+<button (click)="changeCurrent()"><b>Random!</b></button>
 <div class="components-container">
   <app-preferences class="pref-item" (majorChange)="changeMajor($event)" (stateChange)="changeState($event)" (lifestyleChange)="changeLifestyle($event)" (salaryChange)="changeSalary($event)"></app-preferences>
 
@@ -6,4 +7,4 @@
   <app-results [map]="mapComponent" class="result-item"></app-results>
 </div>
 
-<button (click)="changeCurrent()">Randomize Nodes</button>
+

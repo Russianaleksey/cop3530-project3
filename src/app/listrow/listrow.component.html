@@ -1,5 +1,5 @@
 <div class="list-row-container" (click)="setSelected()">
 <label><b>{{node.city != '' ? node.city : '{city_name_missing}'}}, {{node.state}}</b></label><br/>
 <label>Zip: {{node.zipCode}}</label><br />
-<label>Average home value (ZHVI): {{node.zhvi}}</label>
+<label>Average home value (ZHVI): ${{node.zhvi.toFixed(0)}}</label>
 </div>
