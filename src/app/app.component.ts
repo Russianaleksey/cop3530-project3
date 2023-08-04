@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Preferences } from './preferences/preferences.component';
-import { MapNode } from './map/map.component';
+import { MapComponent, MapNode } from './map/map.component';
 import { Data } from './data';
 
 @Component({
@@ -9,7 +9,9 @@ import { Data } from './data';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+  @ViewChild(MapComponent)
+  mapComponent: MapComponent;
+
   title = 'project2';
   state: string[] = [];
   lifestyle: string[] = [];
@@ -36,6 +38,14 @@ export class AppComponent implements OnInit {
   changeSalary(event: any) {
     this.salary = event;
   }
+
+  changeCurrent() {
+    this.currentNodes = []
+    for(let i = 0; i < 20; i++) {
+      this.currentNodes.push(this.allData[Math.floor(Math.random() * this.allData.length)]);
+    }
+    this.mapComponent.refreshMarkers(this.currentNodes);
+  }
 }
 //'outdoorsy', 'bookworm', 'scholar', 'nightlife', 'secluded', 'opulent', 'suburban', 'rural'
 let tagMap = new Map<string, number>([
@@ -53,7 +63,7 @@ let tagMap = new Map<string, number>([
   ['opulent', 600]
 ]);
 
-let geneteScore = function (prefs: Preferences, node: MapNode): number {
+let generateScore = function (prefs: Preferences, node: MapNode): number {
   let score = 0;
   if(node.tags !== null && node.tags?.length != 0) {
     node.tags?.forEach(t => {

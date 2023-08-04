@@ -1,9 +1,9 @@
 <div class="components-container">
   <app-preferences class="pref-item" (majorChange)="changeMajor($event)" (stateChange)="changeState($event)" (lifestyleChange)="changeLifestyle($event)" (salaryChange)="changeSalary($event)"></app-preferences>
 
-  <my-map class="map-item" [currNodes]="currentNodes"></my-map>
+  <my-map class="map-item"></my-map>
 
   <app-results class="result-item"></app-results>
 </div>
 
-<app-listrow [node]="allData[0]"></app-listrow>
+<button (click)="changeCurrent()">Randomize Nodes</button>

@@ -7,14 +7,8 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
     styleUrls: ['./map.component.css']
   })
   export class MapComponent implements OnInit, AfterViewInit {
-    _currNodes: Array<MapNode> = [];
-    get currNodes(): Array<MapNode> {
-      return this._currNodes;
-    };
-    @Input() set currNodes(currentNodes: Array<MapNode>) {
-      this._currNodes = currentNodes;
-      this.refreshMarkers();
-    }
+    currNodes: Array<MapNode> = [];
+    
 
     @ViewChild('map')
     private mapContainer: ElementRef<HTMLElement>;
@@ -27,18 +21,18 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
       this.myIcon = icon(
         {
             iconUrl: '../../assets/maps-and-flags.png',
-            iconSize: [5, 5],
+            iconSize: [50, 50],
             shadowSize: [0, 0]
           }
-        )
+        );
+
+        this.currentMarkers = new Array<Marker>();
      }
   
     ngOnInit() {
-      this.currentMarkers = new Array<Marker>();
     }
 
     ngAfterViewInit() {
-
       const initialState = { lng: 11, lat: 49, zoom: 4 };
   
       this.lefletMap = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
@@ -55,15 +49,18 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
       } as any).addTo(this.lefletMap);
     }
 
-    refreshMarkers() {
+    refreshMarkers(nodes: Array<MapNode>) {
       this.currentMarkers.forEach(m => {
         this.lefletMap.removeLayer(m)
       })
       this.currentMarkers = []
+      this.currNodes = nodes;
       this.currNodes.forEach(n => {
         let m = marker([n.latitude, n.longitude], {icon: this.myIcon});
         this.currentMarkers.push(m);
-        m.addTo(this.lefletMap);
+        if(this.lefletMap != undefined){
+          this.lefletMap.addLayer(m);
+        }
       })
     }
   }
