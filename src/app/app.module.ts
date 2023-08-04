@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { MapComponent } from './map/map.component';
 import { ResultsComponent } from './results/results.component';
+import { ListrowComponent } from './listrow/listrow.component';
 @NgModule({
   declarations: [
     AppComponent,
     PreferencesComponent,
     MapComponent,
-    ResultsComponent
+    ResultsComponent,
+    ListrowComponent
   ],
   imports: [
     BrowserModule,

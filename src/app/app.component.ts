@@ -22,10 +22,6 @@ export class AppComponent implements OnInit {
     this.currentNodes = [this.allData[0]]
   }
   changeMajor(event: any) {
-<<<<<<< Updated upstream
-=======
-    console.log('new major change event: ', event);
->>>>>>> Stashed changes
     this.major = event;
   }
 
@@ -57,7 +53,7 @@ let tagMap = new Map<string, number>([
   ['opulent', 600]
 ]);
 
-let generateScore = function (prefs: Preferences, node: MapNode): number {
+let geneteScore = function (prefs: Preferences, node: MapNode): number {
   let score = 0;
   if(node.tags !== null && node.tags?.length != 0) {
     node.tags?.forEach(t => {

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leaflet';
-import {Data} from '../data';
 
 @Component({
     selector: 'my-map',
@@ -13,10 +12,7 @@ import {Data} from '../data';
       return this._currNodes;
     };
     @Input() set currNodes(currentNodes: Array<MapNode>) {
-      console.log(currentNodes)
-      currentNodes.forEach(n => {
-        this._currNodes.push(n);
-      });
+      this._currNodes = currentNodes;
       this.refreshMarkers();
     }
 
