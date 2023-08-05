@@ -1,5 +1,34 @@
 <div class="list-row-container" (click)="setSelected()">
-<label><b>{{node.city != '' ? node.city : '{city_name_missing}'}}, {{node.state}}</b></label><br/>
-<label>Zip: {{node.zipCode}}</label><br />
-<label>Average home value (ZHVI): ${{node.zhvi.toFixed(0)}}</label>
+  <label
+    ><b
+      >{{ node.city != "" ? node.city : "{city_name_missing}" }},
+      {{ node.state }}</b
+    ></label
+  ><br />
+  <label>Zip: {{ node.zipCode }}</label
+  ><br />
+  <div *ngIf="node.tags != undefined && node.tags.length > 0" class="tag-container">
+    tags:
+    <div *ngFor="let t of node.tags">
+      <p
+        [ngClass]="{
+          'high-tech': t == 'high-tech',
+          'medium-tech': t == 'medium-tech',
+          'low-tech': t == 'low-tech',
+          'outdoorsy': t == 'outdoorsy',
+          'bookworm': t == 'bookworm',
+          'nightlife': t == 'nightlife',
+          'scholar': t == 'scholar',
+          'secluded': t == 'secluded',
+          'financehub': t == 'financehub',
+          'suburban': t == 'suburban',
+          'rural': t == 'rural',
+          'opulent': t == 'opulent',
+          'tag': 1==1
+        }"
+        >{{ t }}</p
+      >
+    </div>
+  </div>
+  <label>Average home value (ZHVI): ${{ node.zhvi.toFixed(0) }}</label>
 </div>

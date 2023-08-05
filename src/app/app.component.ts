@@ -32,18 +32,26 @@ export class AppComponent implements OnInit {
   }
   changeMajor(event: any) {
     this.major = event;
+    console.log(this.major);
+    this.reprocessAllNodes();
   }
 
   changeLifestyle(event: any) {
-    this.lifestyle.push(event);
+    this.lifestyle = event;
+    console.log(this.lifestyle);
+    this.reprocessAllNodes();
   }
 
   changeState(event: any) {
-    this.state.push(event);
+    this.state = event;
+    console.log(this.state);
+    this.reprocessAllNodes();
   }
 
   changeSalary(event: any) {
     this.salary = event;
+    console.log(this.salary);
+    this.reprocessAllNodes();
   }
 
   changeCurrent() {
@@ -51,8 +59,8 @@ export class AppComponent implements OnInit {
     for(let i = 0; i < this.allData.length; i++) {
       count += this.allData[i].city == '' ? 1 : 0;
     }
-    console.log("Number of nodes with no city: " + count);
-    this.currentNodes = []
+    this.currentNodes = [];
+    this.quicksortDS.empty();
     this.quicksortDS.empty();
     for(let i = 0; i < 20; i++) {
       let randomMapNode = this.allData[Math.floor(Math.random() * this.allData.length)];
@@ -63,32 +71,37 @@ export class AppComponent implements OnInit {
     }
     let p = this.quicksortDS.getTopNNodesOnly(10);
     let pq = this.shellSort.topNDataOnly(10);
-    this.resultsComponent.propegateNodes(p);
+    this.resultsComponent.propegateNodes(pq);
     
+    this.mapComponent.refreshMarkers(pq);
+  }
+/*
+export interface Preferences {
+  major: string
+  lifestyle: Array<string>
+  state: Array<string>
+  salary: number
+}
+*/
+  reprocessAllNodes() {
+    this.currentNodes = [];
+    this.quicksortDS.empty();
+    this.shellSort.empty();
+    let pref: Preferences = {major: this.major, lifestyle: this.lifestyle, state: this.state, salary: this.salary};
+    console.log(pref)
 
-    let quicksort = this.quicksortDS.getTopNWithPriority(10);
-    let pqWithPrio = this.shellSort.topNWithPriority(10);
+    this.allData.forEach(node => {
+      let score = generateScore(pref, node);
+      this.shellSort.push(node, score);
+      this.quicksortDS.push(score, node);
+    });
 
-    console.log("ShellSort results: \n");
-    for (let i = 0; i < pq.length; ++i)
-      console.log(`City: ${pqWithPrio[i].data.city}, Priority: ${pqWithPrio[i].priority}`);
-
-    console.log("\n\nQuickSort results: \n");
-    for (let i = 0; i < p.length; ++i)
-      console.log(`City: ${quicksort[i].data.city}, Priority: ${quicksort[i].priority}`);
-    this.mapComponent.refreshMarkers(p);
-
-
-    let check = this.quicksortDS.getAllWithPriority();
-    let check2 = this.shellSort.getAllWithPriority();
-
-    let b = true;
-    for (let i = 0; i < check.length; ++i)
-    {
-      if (check[i].priority != check2[i].priority)
-         b = false;
-    }
-    console.log(b);
+    let shellSortResults = this.shellSort.topNDataOnly(10);
+    let quickSortResults = this.quicksortDS.getTopNNodesOnly(10);
+    this.resultsComponent.propegateNodes(shellSortResults);
+    this.mapComponent.refreshMarkers(shellSortResults);
+    this.currentNodes = shellSortResults;
+    console.log('done processing');
   }
 }
 let tagMap = new Map<string, number>([

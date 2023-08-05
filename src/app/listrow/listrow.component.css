@@ -15,3 +15,63 @@ p {
     padding: 10px;
 }
 
+.tag {
+    width: auto;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    color: white;
+}
+
+.high-tech {
+    background-color: blue;
+}
+.tag-container {
+    display: flex;
+}
+.medium-tech {
+    background-color: aqua;
+}
+
+.low-tech {
+    background-color: aquamarine;
+}
+
+.outdoorsy {
+    background-color: burlywood;
+}
+
+.bookworm {
+    background-color:cadetblue;
+}
+
+.nightlife {
+    background-color: blueviolet;
+}
+
+.scholar {
+    background-color:bisque;
+}
+
+.secluded {
+    background-color: coral;
+}
+
+.financehub {
+    background-color: cornflowerblue;
+}
+
+.suburban {
+    background-color:darkseagreen;
+}
+
+.rural {
+    background-color: darkkhaki;
+}
+
+.opulent {
+    background-color: deeppink;
+}

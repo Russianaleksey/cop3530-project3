@@ -57,12 +57,13 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
       this.currNodes = nodes;
       this.currNodes.forEach(n => {
         let m = marker([n.latitude, n.longitude], {icon: this.myIcon});
-        let toolTipText = `${n.city != '' ? n.city : '{missing_city_name}'}, ${n.state}<br />`;
+        let toolTipText = `<b>${n.city != '' ? n.city : '{missing_city_name}'}, ${n.state}</b><br />`;
         toolTipText += `Zip: ${n.zipCode}<br />`;
         toolTipText += `Average home value (ZHVI): ${n.zhvi.toFixed(0)}<br />`;
         if(n.tags != undefined && n.tags.length > 0) {
-          toolTipText += 'Tags: ';
-          n.tags?.forEach(t => toolTipText += t + ' ');
+          toolTipText += '<div class=\'tag-container\'>Tags:</br> ';
+          n.tags?.forEach(t => toolTipText += this.getTagMapping(t));
+          toolTipText += '</div>';
         }
         
         m.bindTooltip(toolTipText).openTooltip();
@@ -72,7 +73,7 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
         }
       })
       if(this.lefletMap != undefined) {
-        this.panMapToNode(this.currNodes[0]);
+        this.panMapToNode(this.currNodes[0]); 
       }
     }
 
@@ -80,6 +81,10 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
       if(this.lefletMap !=  undefined) {
         this.lefletMap.setView([node.latitude, node.longitude], 6);
       }
+    }
+
+    private getTagMapping(tag: string) {
+      return `<span class='tag ${tag}'>${tag}</span><br/>`
     }
   }
 
@@ -103,5 +108,8 @@ import { Browser, Map, map, tileLayer, Marker, marker, Icon, icon, } from 'leafl
       this.longitude = lo;
       this.zhvi = zh;
       this.county = cou;
+      if(tagArray != undefined) {
+        this.tags = tagArray;
+      }
     }
   }

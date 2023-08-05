@@ -44,6 +44,10 @@ export class ShellSort<T> {
         this.sort();
         return this.mapNodes;
     }
+
+    empty() {
+        this.mapNodes = [];
+    }
 }
 
 export class CustomSorting<T> {

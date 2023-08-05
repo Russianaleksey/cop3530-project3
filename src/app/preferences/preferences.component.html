@@ -9,21 +9,21 @@
   </div>
 
   <div class="prefGroup"> 
-    <label>Lifestyle</label>
+    <label>Lifestyle Choices</label>
     <select id="lifestyle" [(ngModel)]="selectedLifestyle" (ngModelChange)="handleLifestyleChange($event)" multiple>
       <option *ngFor="let l of lifestyles" [ngValue]="l">{{l}}</option>
     </select>
   </div>
 
   <div class="prefGroup">
-    <label>State</label>
+    <label>Preferred State</label>
     <select id="state" [(ngModel)]="selectedState" (ngModelChange)="handleStateChange($event)" multiple>
       <option *ngFor="let y of states" [ngValue]="y">{{y}}</option>
     </select>
   </div>
 
   <div class="prefGroup">
-    <label>Salary</label>
+    <label>Expected Salary</label>
     <input type="number" [(ngModel)]="salary" (ngModelChange)="handleSalaryChange($event)"/>  
   </div>
 </div>

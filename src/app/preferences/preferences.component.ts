@@ -110,6 +110,6 @@ export class PreferencesComponent implements OnInit {
 export interface Preferences {
   major: string
   lifestyle: Array<string>
-  state: Array<string>
+  state: Array<string>;
   salary: number
 }
