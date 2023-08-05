@@ -30,6 +30,7 @@ export class PreferencesComponent implements OnInit {
   selectedLifestyle = this.lifestyles[0];
 
   states = [
+    'none',
     'AL',
     'AK',
     'AZ',

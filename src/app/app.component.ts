@@ -55,13 +55,10 @@ export class AppComponent implements OnInit {
   }
 
   changeCurrent() {
-    let count = 0;
-    for(let i = 0; i < this.allData.length; i++) {
-      count += this.allData[i].city == '' ? 1 : 0;
-    }
+    console.log('clicked')
     this.currentNodes = [];
     this.quicksortDS.empty();
-    this.quicksortDS.empty();
+    this.shellSort.empty();
     for(let i = 0; i < 20; i++) {
       let randomMapNode = this.allData[Math.floor(Math.random() * this.allData.length)];
       let randomPriority = Math.floor(Math.random() * 50000);
@@ -72,7 +69,6 @@ export class AppComponent implements OnInit {
     let p = this.quicksortDS.getTopNNodesOnly(10);
     let pq = this.shellSort.topNDataOnly(10);
     this.resultsComponent.propegateNodes(pq);
-    
     this.mapComponent.refreshMarkers(pq);
   }
 /*
@@ -131,9 +127,9 @@ let generateScore = function (prefs: Preferences, node: MapNode): number {
   }
 
   if(prefs.state.includes(node.state)) {
-    score += 1500;
+    score += 1000000;
   }
-  let yearsToPayOff = node.zhvi / prefs.salary;
-  score += 10000/yearsToPayOff;
+  //let yearsToPayOff = node.zhvi / prefs.salary;
+  //score += 10000/yearsToPayOff;
   return score;
 };
