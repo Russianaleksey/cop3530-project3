@@ -26,10 +26,13 @@ export class AppComponent implements OnInit {
   quicksortDS: CustomSorting<MapNode>;
   shellSort: ShellSort<MapNode>;
 
+  //initializes custom sorting data structures
   ngOnInit(): void {
     this.quicksortDS = new CustomSorting<MapNode>();
     this.shellSort = new ShellSort<MapNode>();
   }
+
+  //handles the change of major in the preferences
   changeMajor(event: any) {
     this.major = event;
     //console.log(this.major);
@@ -79,6 +82,8 @@ export interface Preferences {
   salary: number
 }
 */
+
+// reprocesses all nodes based on the preferences and update the map and results
   reprocessAllNodes() {
     this.currentNodes = [];
     this.quicksortDS.empty();

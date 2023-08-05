@@ -5,10 +5,12 @@ export class ShellSort<T> {
         this.mapNodes = [];
     }
 
+    //adds an element to the priority queue with a given priority
     push(node: any, priority: number) {
         this.mapNodes.push({ data: node, priority: priority });
     }
 
+    //performs shell sort algorithm to sort elements based on their priorities
     sort() {
         const n = this.mapNodes.length;
         let gap = Math.floor(n / 2);
@@ -26,6 +28,7 @@ export class ShellSort<T> {
         }
     }
 
+    //gets the top N elements in the priority queue, returning only the data portion of the objects
     topNDataOnly(n: number): T[] {
         this.sort();
         let topCities: T[] = [];
@@ -35,11 +38,13 @@ export class ShellSort<T> {
         return topCities;
     }
 
+    //gets the top N elements in the priority queue, returns both priorities and data
     topNWithPriority(n: number) {
         this.sort();
         return this.mapNodes.slice(0, n);
     }
 
+    //gets all elements in the priority queue, returns both priorities and data
     getAllWithPriority() {
         this.sort();
         return this.mapNodes;
@@ -53,6 +58,8 @@ export class ShellSort<T> {
 export class CustomSorting<T> {
     private  dataNodes: {priority: number; data: T} [] = [];
     sortedSinceLastPush: boolean = false;
+
+    //adds element to the custom sorting queue with a given priority
     push(priority: number, data: T) {
         this.dataNodes.push({priority: priority, data: data});
         this.sortedSinceLastPush = false;
@@ -63,6 +70,7 @@ export class CustomSorting<T> {
         this.dataNodes = [];
     }
 
+    //partitioning step of the quicksort algorithm
     private partition(arr: {priority: number; data: T}[], left: number, right: number) {
         let mid = Math.floor((left + right)/2);
         let pivotPriority = arr[mid].priority;
@@ -86,6 +94,7 @@ export class CustomSorting<T> {
         return i;
     }
 
+    //internal recursive sorting function using quicksort
     private internalSort(dataNodes: {priority: number; data: T} [], left: number, right: number) {
         let splitIdx;
         if(dataNodes.length > 1) {
@@ -99,11 +108,14 @@ export class CustomSorting<T> {
         }
         return dataNodes;
     }
+
+    //performs the custom sorting algorithm using quicksort
     sort() {
         this.internalSort(this.dataNodes, 0, this.dataNodes.length-1);
         this.sortedSinceLastPush = true;
     }
 
+    //gets all elements in the custom sorting queue, returns both priorities and data
     getAllWithPriority() {
         if(this.sortedSinceLastPush == false) {
             this.sort();
@@ -111,6 +123,7 @@ export class CustomSorting<T> {
         return this.dataNodes;
     }
 
+    //gets all elements in the custom sorting queue, returns only the data portion of the objects
     getAllNodesOnly() {
         if(this.sortedSinceLastPush == false) {
             this.sort();
@@ -122,7 +135,7 @@ export class CustomSorting<T> {
         return res;
     }
 
-
+    //get the top N elements in the custom sorting queue, returns both priorities and data
     getTopNWithPriority(n: number) {
         if(this.sortedSinceLastPush == false) {
             this.sort();
@@ -134,6 +147,7 @@ export class CustomSorting<T> {
         return res;
     }
 
+    //gets the top N elements in the custom sorting queue, returns only the data portion of the objects
     getTopNNodesOnly(n : number) {
         if(this.sortedSinceLastPush == false) {
             this.sort();
