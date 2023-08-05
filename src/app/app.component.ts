@@ -32,30 +32,29 @@ export class AppComponent implements OnInit {
   }
   changeMajor(event: any) {
     this.major = event;
-    console.log(this.major);
+    //console.log(this.major);
     this.reprocessAllNodes();
   }
 
   changeLifestyle(event: any) {
     this.lifestyle = event;
-    console.log(this.lifestyle);
+    //console.log(this.lifestyle);
     this.reprocessAllNodes();
   }
 
   changeState(event: any) {
     this.state = event;
-    console.log(this.state);
+    //console.log(this.state);
     this.reprocessAllNodes();
   }
 
   changeSalary(event: any) {
     this.salary = event;
-    console.log(this.salary);
+    //console.log(this.salary);
     this.reprocessAllNodes();
   }
 
-  changeCurrent() {
-    console.log('clicked')
+  changeCurrentRandomly() {
     this.currentNodes = [];
     this.quicksortDS.empty();
     this.shellSort.empty();
@@ -68,6 +67,7 @@ export class AppComponent implements OnInit {
     }
     let p = this.quicksortDS.getTopNNodesOnly(10);
     let pq = this.shellSort.topNDataOnly(10);
+
     this.resultsComponent.propegateNodes(pq);
     this.mapComponent.refreshMarkers(pq);
   }
@@ -84,7 +84,6 @@ export interface Preferences {
     this.quicksortDS.empty();
     this.shellSort.empty();
     let pref: Preferences = {major: this.major, lifestyle: this.lifestyle, state: this.state, salary: this.salary};
-    console.log(pref)
 
     this.allData.forEach(node => {
       let score = generateScore(pref, node);
@@ -92,12 +91,22 @@ export interface Preferences {
       this.quicksortDS.push(score, node);
     });
 
+    let shellStart = performance.now();
+    let allShellSortResults = this.shellSort.getAllWithPriority();
+    let shellTimeTaken = performance.now() - shellStart;
+
+    let quickSortStart = performance.now();
+    let allquickSortResults = this.quicksortDS.getAllWithPriority();
+    let quickSortTimeTaken = performance.now() - quickSortStart;
+    console.log("shell sort processing time: " + shellTimeTaken.toPrecision(5) + ' ms\n');
+    console.log("quick sort processing time: " + quickSortTimeTaken.toPrecision(5) + ' ms\n');
+    
+
     let shellSortResults = this.shellSort.topNDataOnly(10);
     let quickSortResults = this.quicksortDS.getTopNNodesOnly(10);
     this.resultsComponent.propegateNodes(shellSortResults);
     this.mapComponent.refreshMarkers(shellSortResults);
     this.currentNodes = shellSortResults;
-    console.log('done processing');
   }
 }
 let tagMap = new Map<string, number>([
@@ -122,7 +131,12 @@ let generateScore = function (prefs: Preferences, node: MapNode): number {
   if(node.tags !== null && node.tags?.length != 0) {
     node.tags?.forEach(t => {
       let val = tagMap.get(t);
-      score += val ? val : 0;
+      if(prefs.lifestyle.includes(t)) {
+        score += val ? val*6 : 0;
+      }
+      else {
+        score += val ? val : 0;
+      }
     });
   }
 
