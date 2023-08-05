@@ -114,6 +114,8 @@ export interface Preferences {
     this.currentNodes = shellSortResults;
   }
 }
+
+// create tags for each node
 let tagMap = new Map<string, number>([
   ['high-tech', 1000],
   ['medium-tech', 800],
@@ -130,7 +132,7 @@ let tagMap = new Map<string, number>([
 ]);
 
 
-// TODO: refactor to handle multiple options in the preferences. Did we already change above to handle multiple? idk
+// assigns a score to each node based on preferences
 let generateScore = function (prefs: Preferences, node: MapNode): number {
   let score = 0;
   if(node.tags !== null && node.tags?.length != 0) {
@@ -148,7 +150,5 @@ let generateScore = function (prefs: Preferences, node: MapNode): number {
   if(prefs.state.includes(node.state)) {
     score += 1000000;
   }
-  //let yearsToPayOff = node.zhvi / prefs.salary;
-  //score += 10000/yearsToPayOff;
   return score;
 };
