@@ -6,8 +6,6 @@ li {
 }
   
   
-  
-  
 .first {
   background-color: gold;
 }
@@ -17,4 +15,15 @@ li {
 
 .third {
   background-color: rgb(205, 127, 50);
+}
+  
+
+.li-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.flex-list-item {
+  margin-bottom: 10px;
 }

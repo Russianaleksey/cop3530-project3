@@ -13,6 +13,7 @@ p {
     border-color: black;
     border-style: solid;
     padding: 10px;
+    background-color: inherit;
 }
 
 .tag {
@@ -77,3 +78,4 @@ p {
 .opulent {
     background-color: deeppink;
 }
+

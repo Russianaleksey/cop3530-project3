@@ -3,6 +3,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
+    overflow: auto;
+    height: 90vh;
 }
 
 h2 {
